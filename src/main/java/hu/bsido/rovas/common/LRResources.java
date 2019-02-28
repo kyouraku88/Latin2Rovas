@@ -8,6 +8,10 @@ public class LRResources {
 		UP, DOWN, LEFT, RIGHT
 	}
 	
+	public enum FileOutput {
+		txt, pdf 
+	}
+	
 	public enum AppColor {
 		BLUE("#428bca"), GREEN("#3cbc53"), RED("#c30808"),
 		LIGHT_GREEN("#ffde03"), BLACK("#000");

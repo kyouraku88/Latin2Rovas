@@ -26,7 +26,7 @@ public class StageManager {
 	private final LRFXMLLoader fxmlLoader;
 	
 	public StageManager(LRFXMLLoader fxmlLoader, Stage stage) {
-//		Main.mainEventBus.register(this);
+		Main.register(this);
 		this.fxmlLoader = fxmlLoader;
 		this.primaryStage = stage;
 	}
@@ -38,23 +38,22 @@ public class StageManager {
 	
 	@Subscribe
 	public void addScene(AddSceneEvent event) {
-		BorderPane root = (BorderPane) primaryStage.getScene().getRoot();
-		StackPane sp = ((StackPane) root.getCenter());
+		StackPane root = (StackPane) primaryStage.getScene().getRoot();
 		Parent newCenter = loadViewNode(event.view.getFxmlFile());
+		System.out.println("newCenter " + newCenter);
 
-		sp.getChildren().add(newCenter);
+		root.getChildren().add(newCenter);
 	}
 	
 	@Subscribe
 	public void backEvent(RemoveLastSceneEvent event) {
-		BorderPane root = (BorderPane) primaryStage.getScene().getRoot();
-		StackPane sp = ((StackPane) root.getCenter());
+		StackPane root = (StackPane) primaryStage.getScene().getRoot();
 
-		final int lastIdx = sp.getChildren().size() - 1;
-		Node latestCenter = sp.getChildren().get(lastIdx);
+		final int lastIdx = root.getChildren().size() - 1;
+		Node latestCenter = root.getChildren().get(lastIdx);
 
 		if (event.direction != null) {
-			slideAbove(event, latestCenter, sp, lastIdx);
+			slideAbove(event, latestCenter, root, lastIdx);
 		}
 	}
 

@@ -1,1 +1,30 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+* {
+   -fx-blue: #428bca;
+   -fx-green: #3cbc53;
+   -fx-gray: #33333D;
+   -fx-red: #c30808;
+}
+
+.btn-green {
+     -jfx-button-type: FLAT;
+     -fx-background-color: -fx-green;
+     -fx-text-fill: white;
+}
+.btn-green:hover {
+	-fx-cursor: hand;
+}
+.btn-blue {
+	-jfx-button-type: FLAT;
+     -fx-background-color: -fx-blue;
+     -fx-text-fill: white;
+}
+.btn-blue:hover {
+	-fx-cursor: hand;
+}
+
+
+.whiteBackGrd {
+	-fx-background-color: WHITE;
+}

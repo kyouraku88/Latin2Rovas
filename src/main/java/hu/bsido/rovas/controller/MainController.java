@@ -4,7 +4,13 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
+import hu.bsido.rovas.Main;
+import hu.bsido.rovas.common.Events.AddSceneEvent;
+import hu.bsido.rovas.common.Events.FillConvertEvent;
 import hu.bsido.rovas.common.LRResources.AppColor;
+import hu.bsido.rovas.view.FxmlView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,14 +20,15 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MainController implements Initializable {
 
 	@FXML private StackPane stackPane;
 	@FXML private AnchorPane anchorPane;
 	@FXML private Label lblDragDrop;
-
-	private File input;
+	@FXML private JFXButton btnChooseFile;
 
 	public MainController() {
 	}
@@ -31,8 +38,8 @@ public class MainController implements Initializable {
 
 		anchorPane.setOnDragEntered(e -> {
 			Dragboard db = e.getDragboard();
-			boolean isTxt = isTxtFile(db);
-			if (isTxt) {
+			File file = getTxtFile(db);
+			if (file != null) {
 				lblDragDrop.setTextFill(AppColor.GREEN.paint());
 			} else {
 				lblDragDrop.setTextFill(AppColor.RED.paint());
@@ -60,25 +67,41 @@ public class MainController implements Initializable {
 			@Override
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
-				boolean isTxt = isTxtFile(db);
-				System.out.println("success " + isTxt);
+				File file = getTxtFile(db);
 				
-				if (isTxt) {
-					// add new center
+				if (file != null) {
+					Main.postEvent(new AddSceneEvent(FxmlView.CONVERT, null));
+					Main.postEvent(new FillConvertEvent(file));
 				}
 				
-				event.setDropCompleted(isTxt);
+				event.setDropCompleted(file != null);
 				event.consume();
+			}
+		});
+
+		btnChooseFile.setOnAction(e -> {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Choose a txt file");
+			fileChooser.getExtensionFilters().add(
+			         new ExtensionFilter("Text Files", "*.txt"));
+
+			File selectedFile = fileChooser.showOpenDialog(stackPane.getScene().getWindow());
+
+			if (selectedFile != null) {
+				Main.postEvent(new AddSceneEvent(FxmlView.CONVERT, null));
+				Main.postEvent(new FillConvertEvent(selectedFile));
 			}
 		});
 	}
 
-	private boolean isTxtFile(Dragboard db) {
-		boolean isTxt = false;
+	private static File getTxtFile(Dragboard db) {
+		File res = null;
 		if (db.hasFiles()) {
 			File file = db.getFiles().iterator().next();
-			isTxt = file.getName().endsWith(".txt");
+			if (file.getName().endsWith(".txt")) {
+				res = file;
+			}
 		}
-		return isTxt;
+		return res;
 	}
 }

@@ -13,6 +13,16 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/MainView.fxml";
 		}
+	},
+	CONVERT {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("convert.title");
+		}
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/ConvertView.fxml";
+		}
 	};
 	
 	public abstract String getTitle();
