@@ -1,5 +1,7 @@
 package hu.bsido.rovas;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
@@ -54,7 +56,7 @@ public class Main extends Application {
     	stageManager = new StageManager(new LRFXMLLoader(resourceBundle()), stage);
     	displayInitialScene();
     }
-    	
+    
     protected void displayInitialScene() {
         stageManager.initScene(FxmlView.MAIN);
     }

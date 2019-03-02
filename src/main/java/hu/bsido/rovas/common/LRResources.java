@@ -25,35 +25,39 @@ public class LRResources {
 	}
 	
 	public static final String[][] ROVASOK = {
-			{"\u00E1","A"},		//AA
-			{"\u00E9","E"},		//EE
-			{"\u00F3","O"},		//OO
-			{"\u00ED","I"},		//II
-			{"\u00FA","U"},		//UU
-			
-			{"q","\u00AB"},
-			{"w","\u005B"},
-			
+			{"\u00E1","A"},		// hosszu a
+			{"\u00E9","E"},		// hosszu e
+			{"\u00F3","O"},		// hosszu o
+			{"\u00ED","I"},		// hosszu i
+			{"\u00FA","U"},		// hosszu u
+
+//			{"q","\u00AB"},
+//			{"w","\u005B"},
+			{"w","v"},
+
+			// TODO AS 0046 nagy F
+			// TODO K (veg) + AK -> 004B nagy K 
+
 			{"\u0301","X"},		// ekezet
-			{"aX","A"},			// mer a hosszu a-t aX-re forditsa
+			{"aX","A"},			// mer a hosszu a-t aX-re forditja
 			{"eX","E"},
 			{"oX","O"},
 			{"iX","I"},
 			{"uX","U"},
-			
+
 			{"\u00F6","\u0071"},		//OE
 			{"\u00FC","\u0077"},		//UE
 			{"\u0151","\u0051"},		//OEE
 			{"\u0171","\u0057"},		//UEE
-			
+
 			{"\u030B","Q"},		// kettos ekezet
 			{"oQ","\u0051"},
 			{"uQ","\u0057"},
-			
+
 			{"\u0308","Y"},		// ketto pont
 			{"oY","\u0071"},
 			{"uY","\u0077"},
-			
+
 			{"ssz","\u0053\u0053"},
 			{"tty","\u0054\u0054"},
 			{"ccs","\u0043\u0043"},
@@ -69,9 +73,9 @@ public class LRResources {
 			{"gy","\u0047"},
 			{"ly","\u004C"},		
 			{"ny","\u004E"},
-			{"zs","\u005A"},			
-			{"x","\u00B0"},
-			{"y","\u00B1"},
+			{"zs","\u005A"},
+			{"x","k\u0053"},	// ksz
+			{"y","i"}
 		};
 	
 }
