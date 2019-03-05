@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.bsido.rovas.controller.LearnController">
+   <children>
+      <Label text="Rovas" />
+      <JFXTextArea fx:id="taRovas" prefColumnCount="20" prefRowCount="2" />
+      <Label text="Latin" />
+      <JFXTextField fx:id="tbLatin">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</VBox>

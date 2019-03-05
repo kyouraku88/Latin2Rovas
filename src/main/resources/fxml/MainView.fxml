@@ -17,6 +17,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </JFXButton>
+            <JFXButton fx:id="btnLearn" styleClass="btn-blue" text="Learn" />
             <AnchorPane fx:id="anchorPane" VBox.vgrow="ALWAYS">
                <children>
                   <Label fx:id="lblDragDrop" alignment="CENTER" text="Drag &amp; Drop Txt files here" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

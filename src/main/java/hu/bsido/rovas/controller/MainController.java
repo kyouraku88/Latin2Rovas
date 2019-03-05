@@ -1,6 +1,7 @@
 package hu.bsido.rovas.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,9 +12,13 @@ import hu.bsido.rovas.common.Events.AddSceneEvent;
 import hu.bsido.rovas.common.Events.FillConvertEvent;
 import hu.bsido.rovas.common.LRResources.AppColor;
 import hu.bsido.rovas.view.FxmlView;
+import hu.bsido.rovas.view.LRFXMLLoader;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -21,6 +26,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MainController implements Initializable {
@@ -29,6 +35,7 @@ public class MainController implements Initializable {
 	@FXML private AnchorPane anchorPane;
 	@FXML private Label lblDragDrop;
 	@FXML private JFXButton btnChooseFile;
+	@FXML private JFXButton btnLearn;
 
 	public MainController() {
 	}
@@ -89,6 +96,22 @@ public class MainController implements Initializable {
 			if (selectedFile != null) {
 				Main.postEvent(new AddSceneEvent(FxmlView.CONVERT, null));
 				Main.postEvent(new FillConvertEvent(selectedFile));
+			}
+		});
+		
+		btnLearn.setOnAction(e -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(FxmlView.LEARN.getFxmlFile()));
+			loader.setClassLoader(LRFXMLLoader.cachingClassLoader); 
+			try {
+				Parent root = loader.load();
+				
+				Stage stage = new Stage();
+				stage.setTitle("Learn");
+				stage.setScene(new Scene(root));
+				stage.show();
+				
+			} catch (IOException ex) {
+				ex.printStackTrace();
 			}
 		});
 	}

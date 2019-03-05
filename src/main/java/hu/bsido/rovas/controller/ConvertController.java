@@ -142,8 +142,6 @@ public class ConvertController implements Initializable {
 			parser.parse(source, new AbstractTextConverter() {
 				@Override
 				public void processExtractedText(String text) {
-
-					System.out.println("newline " + ("\n".equals(text)));
 					if ("\n".equals(text)) {
 						return;
 					}
@@ -168,7 +166,7 @@ public class ConvertController implements Initializable {
 		}
 	}
 
-	private static String simarovas(String line) {
+	public static String simarovas(String line) {
 		for (int i = 0; i < LRResources.ROVASOK.length; i++) {
 			line = line.replaceAll(LRResources.ROVASOK[i][0], LRResources.ROVASOK[i][1]);
 		}
