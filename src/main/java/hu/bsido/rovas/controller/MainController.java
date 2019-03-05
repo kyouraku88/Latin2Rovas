@@ -68,12 +68,12 @@ public class MainController implements Initializable {
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 				File file = getTxtFile(db);
-				
+
 				if (file != null) {
 					Main.postEvent(new AddSceneEvent(FxmlView.CONVERT, null));
 					Main.postEvent(new FillConvertEvent(file));
 				}
-				
+
 				event.setDropCompleted(file != null);
 				event.consume();
 			}
@@ -82,8 +82,7 @@ public class MainController implements Initializable {
 		btnChooseFile.setOnAction(e -> {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Choose a txt file");
-			fileChooser.getExtensionFilters().add(
-			         new ExtensionFilter("Text Files", "*.txt"));
+			fileChooser.getExtensionFilters().add(new ExtensionFilter("Text Files", "*.txt", "*.rtf"));
 
 			File selectedFile = fileChooser.showOpenDialog(stackPane.getScene().getWindow());
 
@@ -98,7 +97,7 @@ public class MainController implements Initializable {
 		File res = null;
 		if (db.hasFiles()) {
 			File file = db.getFiles().iterator().next();
-			if (file.getName().endsWith(".txt")) {
+			if (file.getName().endsWith(".txt") || file.getName().endsWith(".rtf")) {
 				res = file;
 			}
 		}

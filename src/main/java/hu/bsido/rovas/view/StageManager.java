@@ -15,7 +15,6 @@ import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -24,7 +23,7 @@ public class StageManager {
 
 	private final Stage primaryStage;
 	private final LRFXMLLoader fxmlLoader;
-	
+
 	public StageManager(LRFXMLLoader fxmlLoader, Stage stage) {
 		Main.register(this);
 		this.fxmlLoader = fxmlLoader;
@@ -35,16 +34,15 @@ public class StageManager {
 		Parent viewRootNodeHierarchy = loadViewNode(view.getFxmlFile());
 		show(viewRootNodeHierarchy, view.getTitle());
 	}
-	
+
 	@Subscribe
 	public void addScene(AddSceneEvent event) {
 		StackPane root = (StackPane) primaryStage.getScene().getRoot();
 		Parent newCenter = loadViewNode(event.view.getFxmlFile());
-		System.out.println("newCenter " + newCenter);
 
 		root.getChildren().add(newCenter);
 	}
-	
+
 	@Subscribe
 	public void backEvent(RemoveLastSceneEvent event) {
 		StackPane root = (StackPane) primaryStage.getScene().getRoot();
@@ -59,24 +57,24 @@ public class StageManager {
 
 	private void slideAbove(RemoveLastSceneEvent event, Node center, StackPane sp, final int idxToRemove) {
 		Scene spScene = sp.getScene();
-		
+
 		Timeline timeline = new Timeline();
 		KeyValue kv = null;
-		switch(event.direction) {
-			case UP:
-				kv = new KeyValue(center.translateYProperty(), -spScene.getHeight(), Interpolator.EASE_OUT);
-				break;
-			case DOWN:
-				kv = new KeyValue(center.translateYProperty(), spScene.getHeight(), Interpolator.EASE_OUT);
-				break;
-			case LEFT:
-				kv = new KeyValue(center.translateXProperty(), -spScene.getWidth(), Interpolator.EASE_OUT);
-				break;
-			case RIGHT:
-				kv = new KeyValue(center.translateXProperty(), spScene.getWidth(), Interpolator.EASE_OUT);
-				break;
-			default:
-				break;
+		switch (event.direction) {
+		case UP:
+			kv = new KeyValue(center.translateYProperty(), -spScene.getHeight(), Interpolator.EASE_OUT);
+			break;
+		case DOWN:
+			kv = new KeyValue(center.translateYProperty(), spScene.getHeight(), Interpolator.EASE_OUT);
+			break;
+		case LEFT:
+			kv = new KeyValue(center.translateXProperty(), -spScene.getWidth(), Interpolator.EASE_OUT);
+			break;
+		case RIGHT:
+			kv = new KeyValue(center.translateXProperty(), spScene.getWidth(), Interpolator.EASE_OUT);
+			break;
+		default:
+			break;
 		}
 
 		KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
@@ -90,11 +88,11 @@ public class StageManager {
 
 	private void show(final Parent rootNode, String title) {
 		Scene scene = prepareScene(rootNode);
-		
+
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
 		primaryStage.centerOnScreen();
-		
+
 		try {
 			primaryStage.show();
 		} catch (Exception e) {
@@ -104,7 +102,7 @@ public class StageManager {
 
 	private Scene prepareScene(Parent rootNode) {
 		Scene scene = primaryStage.getScene();
-		
+
 		if (scene == null) {
 			scene = new Scene(rootNode);
 		}
